@@ -30,19 +30,26 @@ def wordcount(clean_words):
             occurrence_dict[item] = 1
     return occurrence_dict
     
-def print_wordcount(occurrence_dict):
-    for key, value in occurrence_dict.iteritems():
+def print_sorted_wordcount(word_counts):
+    for key, value in sorted(word_counts.iteritems()):
         print "%s %r" % (key, value)
 
-# def sort_by_frequency(occurrence_dict):
-#    sorted_values = occurrence_dict.values()
-#    print sorted(sorted_values)
+def alphabetize(occurrence_dict):
+    word_counts = {}    
+    for word, num_times in occurrence_dict.iteritems():
+        if not word_counts.has_key(num_times):
+            word_counts[num_times] = [word]
+        else:
+            word_counts[num_times].append(word)
 
-# def alphabetize():
+    for number, word in word_counts.iteritems():
+        word_counts[number] = sorted(word_counts[number])
+
+    return word_counts
 
 def main():
 
-    # sort_by_frequency(wordcount(string_splitter(text)))
-    print_wordcount(wordcount(string_splitter(text)))
+    print_sorted_wordcount(alphabetize(wordcount(string_splitter(text))))
+
 
 main()
